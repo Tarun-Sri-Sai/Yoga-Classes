@@ -10,10 +10,10 @@
 1. Install create-vite using npm:
 
     ```bash
-    npm install create-vite@5.0.1
+    npm install -g create-vite@5.0.1
     ```
 
-1. Go to `frontend`, create a `.env`:
+1. Go to `frontend` and create a `.env`:
 
     ```dotenv
     VITE_SERVER_URL=http://localhost:5174
@@ -25,12 +25,13 @@
     npm install
     ```
 
-1. Go to `backend`, create a `.env`:
+1. Go to `backend` and create a `.env`:
 
-    ``dotenv
+    ```dotenv
     FLASK_HOST=127.0.0.1
     FLASK_PORT=5174
-    MONGODB_CONNECTION_STRING=\<your-mongodb-connection-string\>
+    MONGODB_CONNECTION_STRING=your-mongodb-connection-string
+    ```
 
 1. In the same folder, run:
 
@@ -44,6 +45,7 @@
 1. Go to `backend` and run:
 
     ```bash
+    Scripts/activate
     python src/server.py
     ```
 
