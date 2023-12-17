@@ -48,7 +48,7 @@ const DuesList = ({ duesList }) => {
   const dueItem = (dueDetails, i) => {
     return (
       <div key={i}>
-        <p id="billing-date">{dueDetails.billingDate}</p>
+        <p id="billing-date">{dueDetails.date}</p>
         <p id="amount">{dueDetails.amount}</p>
         <button onClick={() => attemptPayDue(dueDetails)}>Pay Due</button>
         {status}

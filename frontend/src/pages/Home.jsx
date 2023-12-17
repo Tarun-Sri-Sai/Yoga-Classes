@@ -13,6 +13,7 @@ const Home = () => {
   const [userDetails, setUserDetails] = useState({
     name: "",
     timeSlot: "",
+    isEnrolled: false,
     duesList: [],
   });
 
