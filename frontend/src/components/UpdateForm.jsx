@@ -3,24 +3,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 
-const EnrollForm = () => {
-  const [status, setStatus] = useState("");
+const UpdateForm = () => {
   const [timings, setTimings] = useState("");
   const navigate = useNavigate();
-  const { user, logoutUser } = useUserContext()
+  const [status, setStatus] = useState("");
+  const { user, logoutUser } = useUserContext();
 
-  const getCurrentDate = () => {
-    const currentDate = new Date();
-
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
-
-    return `${currentYear}-${currentMonth}`;
-  };
-
-  const attemptEnroll = async () => {
-    const url = import.meta.env.VITE_SERVER_URL + "/enroll";
-    const data = JSON.stringify({ token: user.token, timings: timings, date: getCurrentDate() });
+  const attemptUpdate = async () => {
+    const url = import.meta.env.VITE_SERVER_URL + "/update";
+    const data = JSON.stringify({ token: user.token, timings: timings });
     const headers = {
       headers: {
         "Content-Type": "application/json",
@@ -58,10 +49,11 @@ const EnrollForm = () => {
         <option value="3">5 to 6</option>
       </select>
 
-      <button onClick={() => attemptEnroll()}>Enroll</button>
+      <button onClick={() => attemptUpdate()}>Update Timings</button>
+
       {status}
     </>
   );
 };
 
-export default EnrollForm;
+export default UpdateForm;

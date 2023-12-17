@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const { isLoggedIn, loginUser } = useUserContext();
@@ -9,9 +10,7 @@ const Login = () => {
   const loggedInMessage = <p>You are already logged in</p>;
 
   const [loginData, setLoginData] = useState({
-    name: "",
     username: "",
-    dob: "",
     password: "",
   });
 
@@ -19,25 +18,33 @@ const Login = () => {
 
   const attemptLogin = async () => {
     const url = import.meta.env.VITE_SERVER_URL + "/login";
-    const response = await axios.post(url, loginData);
+    const data = JSON.stringify(loginData);
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    setStatus(response.data.message);
+    try {
+      const response = await axios.post(url, data, headers);
 
-    if (response.data.message === "Success") {
-      loginUser(response.data.token);
-      navigate("/");
-    } else if (response.data.message === 'Logged out') {
-      logoutUser()
-      navigate("/login")
+      setStatus(response.data.message);
+
+      if (response.data.message === "Success") {
+        loginUser(response.data.token);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(`Tried ${url} with ${data} and ${headers}\nError: ${error}`);
     }
   };
 
   const loginForm = (
     <>
       <div>
-        <label htmlFor="signup-username">Username: </label>
+        <label htmlFor="login-username">Username: </label>
         <input
-          id="signup-username"
+          id="login-username"
           type="text"
           value={loginData.username}
           onChange={(e) =>
@@ -50,9 +57,9 @@ const Login = () => {
       </div>
 
       <div>
-        <label htmlFor="signup-password">Password: </label>
+        <label htmlFor="login-password">Password: </label>
         <input
-          id="signup-password"
+          id="login-password"
           type="password"
           value={loginData.password}
           onChange={(e) =>
@@ -64,7 +71,7 @@ const Login = () => {
         />
       </div>
 
-      <button onClick={() => attemptLogin()}>Signup</button>
+      <button onClick={() => attemptLogin()}>Login</button>
 
       <p>{status}</p>
     </>
