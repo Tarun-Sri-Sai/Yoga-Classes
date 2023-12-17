@@ -14,7 +14,7 @@ export const UserContextProvider = ({ children }) => {
 
   const updateInfo = () => {
     const dataString =
-      localStorage.getItem("yogaLogin") ??
+      localStorage.getItem(localStorageKey) ??
       JSON.stringify({ token: null, isLoggedIn: false });
 
     const data = JSON.parse(dataString);

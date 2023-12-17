@@ -33,8 +33,6 @@ const Home = () => {
       try {
         const response = await axios.get(url, headers);
 
-        console.log(response.data.userDetails);
-
         if (response.data.message === "Success") {
           setUserDetails(response.data.userDetails);
         } else if (response.data.message === "Invalid token") {
