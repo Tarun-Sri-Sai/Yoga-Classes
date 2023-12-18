@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const UserContext = createContext();
 
@@ -19,9 +19,11 @@ export const UserContextProvider = ({ children }) => {
 
     const data = JSON.parse(dataString);
 
-    setUser({token: data.token})
-    setIsLoggedIn(data.isLoggedIn)
+    setUser({ token: data.token });
+    setIsLoggedIn(data.isLoggedIn);
   };
+
+  useEffect(() => updateInfo(), []);
 
   const loginUser = (token) => {
     const value = {
