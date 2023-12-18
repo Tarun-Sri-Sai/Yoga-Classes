@@ -64,10 +64,11 @@ const EnrollForm = ({ onSubmit, updated, timeSlots }) => {
             className="border border-gray-300 p-2 rounded-md"
           >
             <option value="">Select an option</option>
-            <option value="0">{timeSlots.get("0")}</option>
-            <option value="1">{timeSlots.get("1")}</option>
-            <option value="2">{timeSlots.get("2")}</option>
-            <option value="3">{timeSlots.get("3")}</option>
+            {[...timeSlots.entries()].map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
           </select>
         </div>
 
