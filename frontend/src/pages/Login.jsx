@@ -40,9 +40,11 @@ const Login = () => {
   };
 
   const loginForm = (
-    <>
-      <div>
-        <label htmlFor="login-username">Username: </label>
+    <div className="flex flex-col items-center mt-16">
+      <div className="mb-4">
+        <label htmlFor="login-username" className="block text-gray-700">
+          Username:{" "}
+        </label>
         <input
           id="login-username"
           type="text"
@@ -53,11 +55,14 @@ const Login = () => {
               username: e.target.value,
             })
           }
+          className="border border-gray-300 p-2 rounded-md"
         />
       </div>
 
-      <div>
-        <label htmlFor="login-password">Password: </label>
+      <div className="mb-4">
+        <label htmlFor="login-password" className="block text-gray-700">
+          Password:{" "}
+        </label>
         <input
           id="login-password"
           type="password"
@@ -68,13 +73,19 @@ const Login = () => {
               password: e.target.value,
             })
           }
+          className="border border-gray-300 p-2 rounded-md"
         />
       </div>
 
-      <button onClick={() => attemptLogin()}>Login</button>
+      <button
+        onClick={() => attemptLogin()}
+        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+      >
+        Login
+      </button>
 
-      <p>{status}</p>
-    </>
+      <p className="text-red-500 mt-2">{status}</p>
+    </div>
   );
 
   return <>{isLoggedIn ? loggedInMessage : loginForm}</>;

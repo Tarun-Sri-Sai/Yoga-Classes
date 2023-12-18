@@ -36,10 +36,16 @@ const Logout = () => {
   };
 
   const logoutForm = (
-    <>
-      <button onClick={() => attemptLogout()}>Logout</button>
-      {status}
-    </>
+    <div className="flex flex-col items-center mt-6">
+      <button
+        onClick={() => attemptLogout()}
+        className="bg-red-500 text-white p-2 rounded-md mb-4 hover:bg-red-600"
+      >
+        Logout
+      </button>
+
+      <p className="text-red-500">{status}</p>
+    </div>
   );
 
   const loggedOutMessage = <p>Already logged out</p>;

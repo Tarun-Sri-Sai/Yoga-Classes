@@ -38,9 +38,11 @@ const Signup = () => {
   };
 
   const signupForm = (
-    <>
-      <div>
-        <label htmlFor="signup-name">Name: </label>
+    <div className="flex flex-col items-center mt-16">
+      <div className="mb-4">
+        <label htmlFor="signup-name" className="block text-gray-700">
+          Name:{" "}
+        </label>
         <input
           id="signup-name"
           type="text"
@@ -51,11 +53,14 @@ const Signup = () => {
               name: e.target.value,
             })
           }
+          className="w-64 border border-gray-300 p-2 rounded-md"
         />
       </div>
 
-      <div>
-        <label htmlFor="signup-username">Username: </label>
+      <div className="mb-4">
+        <label htmlFor="signup-username" className="block text-gray-700">
+          Username:{" "}
+        </label>
         <input
           id="signup-username"
           type="text"
@@ -66,11 +71,14 @@ const Signup = () => {
               username: e.target.value,
             })
           }
+          className="w-64 border border-gray-300 p-2 rounded-md"
         />
       </div>
 
-      <div>
-        <label htmlFor="signup-dob">Date of Birth: </label>
+      <div className="mb-4">
+        <label htmlFor="signup-dob" className="block text-gray-700">
+          Date of Birth:{" "}
+        </label>
         <input
           id="signup-dob"
           type="date"
@@ -81,11 +89,14 @@ const Signup = () => {
               dob: e.target.value,
             })
           }
+          className="w-64 border border-gray-300 p-2 rounded-md"
         />
       </div>
 
-      <div>
-        <label htmlFor="signup-password">Password: </label>
+      <div className="mb-4">
+        <label htmlFor="signup-password" className="block text-gray-700">
+          Password:{" "}
+        </label>
         <input
           id="signup-password"
           type="password"
@@ -96,13 +107,19 @@ const Signup = () => {
               password: e.target.value,
             })
           }
+          className="w-64 border border-gray-300 p-2 rounded-md"
         />
       </div>
 
-      <button onClick={() => attemptSignup()}>Signup</button>
+      <button
+        onClick={() => attemptSignup()}
+        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+      >
+        Signup
+      </button>
 
-      <p>{status}</p>
-    </>
+      <p className="text-red-500 mt-2">{status}</p>
+    </div>
   );
 
   const loggedInMessage = <p>You are already logged in</p>;

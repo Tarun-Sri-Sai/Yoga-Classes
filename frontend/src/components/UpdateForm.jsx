@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 
-const UpdateForm = ({ onSubmit, updated }) => {
+const UpdateForm = ({ onSubmit, updated, timeSlots }) => {
   const [timings, setTimings] = useState("");
   const navigate = useNavigate();
   const [status, setStatus] = useState("");
@@ -37,25 +37,33 @@ const UpdateForm = ({ onSubmit, updated }) => {
   };
 
   return (
-    <>
-      <label htmlFor="enroll-time-slot">Time slot: </label>
+    <div className="flex flex-col items-center bg-white p-6 rounded-md shadow-md">
+      <label htmlFor="enroll-time-slot" className="mb-2 text-lg">
+        Time slot:
+      </label>
 
       <select
         id="enroll-time-slot"
         value={timings}
         onChange={(e) => setTimings(e.target.value)}
+        className="border border-gray-300 p-2 rounded-md mb-4"
       >
         <option value="">Select an option</option>
-        <option value="0">6 to 7</option>
-        <option value="1">7 to 8</option>
-        <option value="2">8 to 9</option>
-        <option value="3">5 to 6</option>
+        <option value="0">{timeSlots.get("0")}</option>
+        <option value="1">{timeSlots.get("1")}</option>
+        <option value="2">{timeSlots.get("2")}</option>
+        <option value="3">{timeSlots.get("3")}</option>
       </select>
 
-      <button onClick={() => attemptUpdate()}>Update Timings</button>
+      <button
+        onClick={() => attemptUpdate()}
+        className="bg-blue-500 text-white p-2 rounded-md mb-4 hover:bg-blue-600"
+      >
+        Update Timings
+      </button>
 
-      {status}
-    </>
+      <p className="text-red-500 mb-4">{status}</p>
+    </div>
   );
 };
 

@@ -50,17 +50,22 @@ const Home = () => {
     setUpdated(false);
   }, [isLoggedIn, updated]);
 
-  const welcomeSection = <p>Welcome {userDetails.name}</p>;
-
+  const welcomeSection = (
+    <p className="text-2xl font-bold text-center text-gray-800 mt-8">
+      Welcome <span className="text-blue-500">{userDetails.name}</span>
+    </p>
+  );
   const timings = new Map([
-    ["0", "6 to 7"],
-    ["1", "7 to 8"],
-    ["2", "8 to 9"],
-    ["3", "5 to 6"],
+    ["0", "6 to 7 AM"],
+    ["1", "7 to 8 AM"],
+    ["2", "8 to 9 AM"],
+    ["3", "5 to 6 PM"],
   ]);
 
   const enrolledMessage = (
-    <p>You are enrolled in {timings.get(userDetails.timeSlot)}</p>
+    <p className="text-lg font-semibold text-center text-blue-700">
+      You are enrolled in {timings.get(userDetails.timeSlot)}
+    </p>
   );
 
   const formProps = {
@@ -71,11 +76,13 @@ const Home = () => {
   const detailsSection = (
     <>
       <div>{enrolledMessage}</div>
-      <div>
-        <DuesList duesList={userDetails.duesList} {...formProps} />
-      </div>
-      <div>
-        <UpdateForm {...formProps} />
+      <div className="flex justify-center">
+        <div className="mr-4">
+          <DuesList duesList={userDetails.duesList} {...formProps} />
+        </div>
+        <div>
+          <UpdateForm {...formProps} timeSlots={timings} />
+        </div>
       </div>
     </>
   );
@@ -83,7 +90,7 @@ const Home = () => {
   const enrolledCourse = userDetails.isEnrolled ? (
     detailsSection
   ) : (
-    <EnrollForm {...formProps} />
+    <EnrollForm {...formProps} timeSlots={timings} />
   );
 
   const loggedInPage = (
@@ -93,7 +100,13 @@ const Home = () => {
     </>
   );
   const loggedOutPage = (
-    <p>Please login if you're an existing user (or) signup if you are new.</p>
+    <p className="text-center text-gray-700 mt-16">
+      Welcome! Please&nbsp;
+      <span className="text-blue-500 font-semibold">login</span>
+      &nbsp;if you're an existing user, or&nbsp;
+      <span className="text-green-500 font-semibold">signup</span>
+      &nbsp;if you are new.
+    </p>
   );
 
   return <>{isLoggedIn ? loggedInPage : loggedOutPage}</>;
