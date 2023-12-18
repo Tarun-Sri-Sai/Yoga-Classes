@@ -4,6 +4,8 @@
 
 - `node`: v20.5.1
 - `npm`: v9.8.0
+- `python`: v3.12.1
+- `pip`: v23.2.1
 
 ## Installation
 
@@ -23,6 +25,12 @@
 
     ```bash
     npm install
+    ```
+
+1. At the root of the project, run:
+
+    ```bash
+    python -m venv backend
     ```
 
 1. Go to `backend` and create a `.env`:
