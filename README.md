@@ -10,12 +10,6 @@
 
 ## Installation
 
-1. Install create-vite using npm:
-
-    ```bash
-    npm install -g create-vite
-    ```
-
 1. Go to `frontend` and create a `.env`:
 
     ```dotenv
