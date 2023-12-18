@@ -12,7 +12,7 @@
 1. Install create-vite using npm:
 
     ```bash
-    npm install -g create-vite@5.0.1
+    npm install -g create-vite
     ```
 
 1. Go to `frontend` and create a `.env`:
@@ -62,3 +62,5 @@
     ```bash
     npm run dev
     ```
+
+1. Go to `localhost:5173` to access the site.
