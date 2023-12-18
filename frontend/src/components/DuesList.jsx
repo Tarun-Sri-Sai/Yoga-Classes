@@ -59,7 +59,7 @@ const DuesList = ({ duesList, onSubmit, updated }) => {
             {dueDetails.date}
           </p>
           <p className="text-gray-600" id="amount">
-            ${dueDetails.amount}
+            Rs. {dueDetails.amount}
           </p>
         </div>
 
