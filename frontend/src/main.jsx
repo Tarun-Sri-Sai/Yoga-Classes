@@ -5,7 +5,7 @@ import "./index.css";
 import { UserContextProvider } from "./contexts/UserContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <UserContextProvider>
-      <App />
-    </UserContextProvider>
+  <UserContextProvider>
+    <App />
+  </UserContextProvider>
 );

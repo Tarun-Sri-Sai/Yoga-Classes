@@ -10,7 +10,7 @@ const Logout = () => {
 
   const attemptLogout = async () => {
     const url = import.meta.env.VITE_SERVER_URL + "/logout";
-    const data = JSON.stringify({ token: user.token});
+    const data = JSON.stringify({ token: user.token });
     const headers = {
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,11 @@ const Logout = () => {
 
       setStatus(response.data.message);
 
-      if (["Success", "Already logged out", "Invalid token"].includes(response.data.message)) {
+      if (
+        ["Success", "Already logged out", "Invalid token"].includes(
+          response.data.message
+        )
+      ) {
         logoutUser();
         navigate("/");
       }
