@@ -137,6 +137,7 @@ class MongoApp:
             'age': age,
             'password': hashed_password,
             'time_slot': '',
+            'time_slot_last_modified': '',
             'enrolled': False,
             'enrolled_date': '',
             'dues_list': [
@@ -265,8 +266,13 @@ class MongoApp:
 
         if full_user_details['time_slot'] == data['timings']:
             return 'Already chose this timeslot'
+        
+        current_month = MongoApp._get_current_month()
+        if full_user_details['time_slot_last_modified'] == current_month:
+            return 'You can only change slots once a month'
 
         full_user_details['time_slot'] = data['timings']
+        full_user_details['time_slot_last_modified'] = current_month
         self._user_collection.find_one_and_replace(username_key, 
                                                    full_user_details)
         return 'Success'
