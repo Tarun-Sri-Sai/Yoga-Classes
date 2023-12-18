@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 
-const UpdateForm = () => {
+const UpdateForm = ({ onSubmit, updated }) => {
   const [timings, setTimings] = useState("");
   const navigate = useNavigate();
   const [status, setStatus] = useState("");
   const { user, logoutUser } = useUserContext();
+
+  useEffect(() => setStatus(""), [updated]);
 
   const attemptUpdate = async () => {
     const url = import.meta.env.VITE_SERVER_URL + "/update";
@@ -23,10 +25,11 @@ const UpdateForm = () => {
 
       setStatus(response.data.message);
       if (response.data.message === "Success") {
+        onSubmit();
         navigate("/");
       } else if (response.data.message === "Invalid token") {
-        logoutUser()
-        navigate("/login")
+        logoutUser();
+        navigate("/login");
       }
     } catch (error) {
       console.log(`Tried ${url} with ${data} and ${headers}\nError: ${error}`);

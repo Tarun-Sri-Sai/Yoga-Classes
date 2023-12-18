@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 import axios from "axios";
 
-const DuesList = ({ duesList }) => {
+const DuesList = ({ duesList, onSubmit, updated }) => {
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const { user, logoutUser } = useUserContext();
+
+  useEffect(() => setStatus(""), [updated]);
 
   const completePayment = (amount) => {
     if (amount) {
@@ -35,6 +37,7 @@ const DuesList = ({ duesList }) => {
       setStatus(response.data.message);
 
       if (response.data.message === "Success") {
+        onSubmit();
         navigate("/");
       } else if (response.data.message === "Invalid token") {
         logoutUser();

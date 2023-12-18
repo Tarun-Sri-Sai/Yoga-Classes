@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { isLoggedIn, user, logoutUser } = useUserContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [updated, setUpdated] = useState(false);
 
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -38,7 +39,7 @@ const Home = () => {
           setUserDetails(response.data.userDetails);
         } else if (response.data.message === "Invalid token") {
           logoutUser();
-          navigate("/login")
+          navigate("/login");
         }
       } catch (error) {
         console.log(`Tried ${url} with ${headers}\nError: ${error}`);
@@ -46,7 +47,8 @@ const Home = () => {
     };
 
     fetchDetails();
-  }, []);
+    setUpdated(false);
+  }, [isLoggedIn, updated]);
 
   const welcomeSection = <p>Welcome {userDetails.name}</p>;
 
@@ -61,14 +63,19 @@ const Home = () => {
     <p>You are enrolled in {timings.get(userDetails.timeSlot)}</p>
   );
 
+  const formProps = {
+    onSubmit: () => setUpdated(true),
+    updated: updated,
+  };
+
   const detailsSection = (
     <>
       <div>{enrolledMessage}</div>
       <div>
-        <DuesList duesList={userDetails.duesList} />
+        <DuesList duesList={userDetails.duesList} {...formProps} />
       </div>
       <div>
-        <UpdateForm />
+        <UpdateForm {...formProps} />
       </div>
     </>
   );
@@ -76,7 +83,7 @@ const Home = () => {
   const enrolledCourse = userDetails.isEnrolled ? (
     detailsSection
   ) : (
-    <EnrollForm />
+    <EnrollForm {...formProps} />
   );
 
   const loggedInPage = (
