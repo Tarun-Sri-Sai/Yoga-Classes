@@ -49,6 +49,10 @@ class MongoApp:
             dues_list.append({'date': next_month,
                               'amount': 500,
                               'status': 'unpaid'})
+            
+        while len(dues_list) > 100:
+            dues_list.pop(0)
+
         full_user_details['dues_list'] = dues_list
         self._user_collection.find_one_and_replace(username_key, full_user_details)
 
