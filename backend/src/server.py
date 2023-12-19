@@ -1,4 +1,4 @@
-from src.mongo_app import MongoApp
+from mongo_app import MongoApp
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
