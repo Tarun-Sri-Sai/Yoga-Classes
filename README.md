@@ -13,7 +13,7 @@
 1. Go to `frontend` and create a `.env`:
 
     ```dotenv
-    VITE_SERVER_URL=http://localhost:5174
+    VITE_SERVER_URL=http://localhost:5000
     ```
 
 1. In the same folder, run:
@@ -31,8 +31,8 @@
 1. Go to `backend` and create a `.env`:
 
     ```dotenv
-    FLASK_HOST=127.0.0.1
-    FLASK_PORT=5174
+    FLASK_HOST=0.0.0.0
+    FLASK_PORT=5000
     MONGODB_CONNECTION_STRING=your-mongodb-connection-string
     ```
 
@@ -58,4 +58,4 @@
     npm run dev
     ```
 
-1. Go to `localhost:5173` to access the site.
+1. Go to `localhost:3000` to access the site.
