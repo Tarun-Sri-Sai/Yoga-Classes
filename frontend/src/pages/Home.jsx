@@ -50,11 +50,6 @@ const Home = () => {
     setUpdated(false);
   }, [isLoggedIn, updated]);
 
-  const welcomeSection = (
-    <p className="text-2xl font-bold text-center text-gray-800 mt-8">
-      Welcome <span className="text-blue-500">{userDetails.name}</span>
-    </p>
-  );
   const timings = new Map([
     ["0", "6 to 7 AM"],
     ["1", "7 to 8 AM"],
@@ -62,54 +57,52 @@ const Home = () => {
     ["3", "5 to 6 PM"],
   ]);
 
-  const enrolledMessage = (
-    <p className="text-lg font-semibold text-center text-blue-700">
-      You are enrolled in {timings.get(userDetails.timeSlot)}
-    </p>
-  );
-
   const formProps = {
     onSubmit: () => setUpdated(true),
     updated: updated,
   };
 
-  const detailsSection = (
+  return (
     <>
-      <div>{enrolledMessage}</div>
-      <div className="flex justify-center">
-        <div className="mr-4">
-          <DuesList duesList={userDetails.duesList} {...formProps} />
-        </div>
-        <div>
-          <UpdateForm {...formProps} timeSlots={timings} />
-        </div>
-      </div>
+      {isLoggedIn ? (
+        <>
+          <div>
+            <p className="text-2xl font-bold text-center text-gray-800 mt-8">
+              Welcome <span className="text-blue-500">{userDetails.name}</span>
+            </p>
+          </div>
+          <div>
+            userDetails.isEnrolled ? (
+            <>
+              <div>
+                <p className="text-lg font-semibold text-center text-blue-700">
+                  You are enrolled in {timings.get(userDetails.timeSlot)}
+                </p>
+              </div>
+              <div className="flex justify-center">
+                <div className="mr-4">
+                  <DuesList duesList={userDetails.duesList} {...formProps} />
+                </div>
+                <div>
+                  <UpdateForm {...formProps} timeSlots={timings} />
+                </div>
+              </div>
+            </>
+            ) : (
+            <EnrollForm {...formProps} timeSlots={timings} />)
+          </div>
+        </>
+      ) : (
+        <p className="text-center text-gray-700 mt-16">
+          Welcome! Please&nbsp;
+          <span className="text-blue-500 font-semibold">login</span>
+          &nbsp;if you're an existing user, or&nbsp;
+          <span className="text-green-500 font-semibold">signup</span>
+          &nbsp;if you are new.
+        </p>
+      )}
     </>
   );
-
-  const enrolledCourse = userDetails.isEnrolled ? (
-    detailsSection
-  ) : (
-    <EnrollForm {...formProps} timeSlots={timings} />
-  );
-
-  const loggedInPage = (
-    <>
-      <div>{welcomeSection}</div>
-      <div>{enrolledCourse}</div>
-    </>
-  );
-  const loggedOutPage = (
-    <p className="text-center text-gray-700 mt-16">
-      Welcome! Please&nbsp;
-      <span className="text-blue-500 font-semibold">login</span>
-      &nbsp;if you're an existing user, or&nbsp;
-      <span className="text-green-500 font-semibold">signup</span>
-      &nbsp;if you are new.
-    </p>
-  );
-
-  return <>{isLoggedIn ? loggedInPage : loggedOutPage}</>;
 };
 
 export default Home;

@@ -35,22 +35,24 @@ const Logout = () => {
     }
   };
 
-  const logoutForm = (
-    <div className="flex flex-col items-center mt-6">
-      <button
-        onClick={() => attemptLogout()}
-        className="bg-red-500 text-white p-2 rounded-md mb-4 hover:bg-red-600"
-      >
-        Logout
-      </button>
+  return (
+    <>
+      {isLoggedIn ? (
+        <div className="flex flex-col items-center mt-6">
+          <button
+            onClick={() => attemptLogout()}
+            className="bg-red-500 text-white p-2 rounded-md mb-4 hover:bg-red-600"
+          >
+            Logout
+          </button>
 
-      <p className="text-red-500">{status}</p>
-    </div>
+          <p className="text-red-500">{status}</p>
+        </div>
+      ) : (
+        <p>Already logged out</p>
+      )}
+    </>
   );
-
-  const loggedOutMessage = <p>Already logged out</p>;
-
-  return <>{isLoggedIn ? logoutForm : loggedOutMessage}</>;
 };
 
 export default Logout;
