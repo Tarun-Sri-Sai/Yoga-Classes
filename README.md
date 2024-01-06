@@ -22,12 +22,6 @@
     npm install
     ```
 
-1. At the root of the project, run:
-
-    ```bash
-    python -m venv backend
-    ```
-
 1. Go to `backend` and create a `.env`:
 
     ```dotenv
@@ -39,7 +33,8 @@
 1. In the same folder, run:
 
     ```bash
-    Scripts/activate
+    python -m venv .venv
+    .venv/Scripts/activate
     pip install -r requirements.txt
     ```
 
@@ -48,7 +43,7 @@
 1. Go to `backend` and run:
 
     ```bash
-    Scripts/activate
+    .venv/Scripts/activate
     python src/server.py
     ```
 
