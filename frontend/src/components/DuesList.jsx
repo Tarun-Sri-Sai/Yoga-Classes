@@ -48,48 +48,50 @@ const DuesList = ({ duesList, onSubmit, updated }) => {
     }
   };
 
-  return (
-    <>
-      {duesList.length === 0 ? (
-        <div className="flex items-center justify-center h-full">
-          <div className="bg-white p-6 rounded-md shadow-md mb-4">
-            <p className="text-lg font-semibold text-gray-800 mb-2">
-              No dues remaining
-            </p>
-          </div>
+  const dueItem = (dueDetails, i) => {
+    return (
+      <div
+        key={i}
+        className="bg-white p-4 rounded-md shadow-md mb-4 flex items-center justify-between"
+      >
+        <div>
+          <p className="text-lg font-semibold" id="billing-date">
+            {dueDetails.date}
+          </p>
+          <p className="text-gray-600" id="amount">
+            Rs. {dueDetails.amount}
+          </p>
         </div>
-      ) : (
-        <div className="bg-white p-6 rounded-md shadow-md mb-4">
-          {duesList.map((dueDetails, i) => {
-            <div
-              key={i}
-              className="bg-white p-4 rounded-md shadow-md mb-4 flex items-center justify-between"
-            >
-              <div>
-                <p className="text-lg font-semibold" id="billing-date">
-                  {dueDetails.date}
-                </p>
-                <p className="text-gray-600" id="amount">
-                  Rs. {dueDetails.amount}
-                </p>
-              </div>
 
-              <div>
-                <button
-                  onClick={() => attemptPayDue(dueDetails)}
-                  className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 ml-4"
-                >
-                  Pay Due
-                </button>
-              </div>
-
-              <p className="text-red-500 ml-4">{status}</p>
-            </div>;
-          })}
+        <div>
+          <button
+            onClick={() => attemptPayDue(dueDetails)}
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 ml-4"
+          >
+            Pay Due
+          </button>
         </div>
-      )}
-    </>
+
+        <p className="text-red-500 ml-4">{status}</p>
+      </div>
+    );
+  };
+
+  const dues = (
+    <div className="bg-white p-6 rounded-md shadow-md mb-4">
+      {duesList.map((dueDetails, i) => dueItem(dueDetails, i))}
+    </div>
   );
+  const noDuesMessage = (
+    <div className="flex items-center justify-center h-full">
+      <div className="bg-white p-6 rounded-md shadow-md mb-4">
+        <p className="text-lg font-semibold text-gray-800 mb-2">
+          No dues remaining
+        </p>
+      </div>
+    </div>
+  );
+  return <>{duesList.length === 0 ? noDuesMessage : dues}</>;
 };
 
 export default DuesList;
