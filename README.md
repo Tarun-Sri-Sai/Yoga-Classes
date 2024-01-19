@@ -33,8 +33,8 @@
 1. In the same folder, run:
 
     ```bash
-    python -m venv .venv
-    .venv/Scripts/activate
+    python -m venv venv
+    venv/Scripts/activate  # source venv/bin/activate for Unix-based OSes
     pip install -r requirements.txt
     ```
 
