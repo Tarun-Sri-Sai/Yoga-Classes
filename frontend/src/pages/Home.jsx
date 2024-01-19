@@ -42,7 +42,7 @@ const Home = () => {
           navigate("/login");
         }
       } catch (error) {
-        console.log(`Tried ${url} with ${headers}\nError: ${error}`);
+        console.log(`Tried ${url} with ${JSON.stringify(headers)}\nError: ${error}`);
       }
     };
 

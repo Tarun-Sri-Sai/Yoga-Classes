@@ -45,7 +45,7 @@ const EnrollForm = ({ onSubmit, updated, timeSlots }) => {
         navigate("/login");
       }
     } catch (error) {
-      console.log(`Tried ${url} with ${data} and ${headers}\nError: ${error}`);
+      console.log(`Tried ${url} with ${data} and ${JSON.stringify(headers)}\nError: ${error}`);
     }
   };
 
